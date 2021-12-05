@@ -16,6 +16,15 @@ public class TestExpressionParser {
         assert parse.toString().equals("a");
     }
 
+
+    @Test
+    public void testd1() throws Exception{
+        String express ="(data_needed.b - data_needed.c)/data_needed.b";
+        Parser parser =new Parser(express);
+        BaseExpression be =parser.parse();
+        System.out.println(be.eval());
+    }
+
     @Test
     public void test02() throws ParseExpressionException {
         Parser parser = new Parser("obj.x");

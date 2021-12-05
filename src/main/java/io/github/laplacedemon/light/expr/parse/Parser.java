@@ -5,16 +5,9 @@ import java.util.List;
 
 import io.github.laplacedemon.light.expr.BaseExpression;
 import io.github.laplacedemon.light.expr.ExpressionBuilder;
-import io.github.laplacedemon.light.expr.atomic.NumberExpressionBuilder;
-import io.github.laplacedemon.light.expr.atomic.PriorityExpressionBuilder;
-import io.github.laplacedemon.light.expr.atomic.StringExpressionBuilder;
-import io.github.laplacedemon.light.expr.atomic.SymbolExpressionBuilder;
-import io.github.laplacedemon.light.expr.atomic.TupleExpression;
+import io.github.laplacedemon.light.expr.atomic.*;
 import io.github.laplacedemon.light.expr.equation.EquationExpressionBuilder;
-import io.github.laplacedemon.light.expr.pair.AddExpressionBuilder;
-import io.github.laplacedemon.light.expr.pair.DivExpressionBuilder;
-import io.github.laplacedemon.light.expr.pair.MulExpressionBuilder;
-import io.github.laplacedemon.light.expr.pair.SubExpressionBuilder;
+import io.github.laplacedemon.light.expr.pair.*;
 
 public class Parser {
     private String expression;
@@ -33,6 +26,7 @@ public class Parser {
     private BaseExpression lastExpression = null;
     private List<BaseExpression> expressionList = null;
     private ExpressionBuilder curExpressionBuilder = null;
+    private BaseExpression expoExpression = null;
 
     public BaseExpression parse() throws ParseExpressionException {
         {
@@ -51,6 +45,7 @@ public class Parser {
                 if (!append) {
                     if (curExpressionBuilder != null) {
                         BaseExpression newExpression = curExpressionBuilder.build();
+                        expoExpression =newExpression;
                         curExpressionBuilder = null;
                         if (lastExpression != null) {
                             lastExpression = lastExpression.join(newExpression);
@@ -110,8 +105,13 @@ public class Parser {
         } else if(ch == ',') {
             this.expressionList.add(this.lastExpression);
             this.lastExpression = null;
-        } else {
-//        	System.out.println("???");
+        } else if(ch == '[') {
+            this.curExpressionBuilder = new FrameExpressionBuilder(ch);
+        }
+        else if(ch == '^') {
+            this.curExpressionBuilder = new ExpoExpressionBuilder(ch);
+        }else {
+         	System.out.println("不认识");
         }
         
         return true;

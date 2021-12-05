@@ -31,7 +31,15 @@ public class MulExpression extends PairExpression {
             
             pairExpression.setLeft(this);
             return pairExpression;
-        } else if(baseExpression instanceof MulExpression || baseExpression instanceof DivExpression) {
+        }
+        else if (baseExpression instanceof ExpoExpression){
+            ExpoExpression ee =new ExpoExpression();
+            ee.setLeft(this.right);
+            this.setRight(ee);
+            return this;
+        }
+
+        else if(baseExpression instanceof MulExpression || baseExpression instanceof DivExpression) {
             PairExpression pairExpression = (PairExpression)baseExpression;
             pairExpression.setLeft(this);
             return pairExpression;

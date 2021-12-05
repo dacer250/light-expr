@@ -23,6 +23,11 @@ public class FuncExpression extends ItemExpression {
         if(this.func.equals("sin")  || this.func.equals("Sin") || this.func.equals("SIN")) {
             Number num = (Number)priorityExpression.eval();
             return Math.sin(num.doubleValue());
+        } else if(this.func.equals("avg") || this.func.equals("Avg") || this.func.equals("AVG")) {
+            double doubleValue = ((Number)priorityExpression.eval()).doubleValue();
+            System.out.println("计算平均值");
+            //TODO
+            return -100;
         } else if(this.func.equals("cos") || this.func.equals("Cos") || this.func.equals("COS")) {
             double doubleValue = ((Number)priorityExpression.eval()).doubleValue();
             return Math.cos(doubleValue);
