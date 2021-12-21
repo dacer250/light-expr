@@ -38,7 +38,7 @@ public class AttributeExpression extends SymbolExpression {
     
     @Override
     public String toString() {
-        return this.symbolList.toString();
+        return this.symbolList.get(0).toString()+"."+this.symbolList.get(1).toString();
     }
     @Override
     public Object eval(){
