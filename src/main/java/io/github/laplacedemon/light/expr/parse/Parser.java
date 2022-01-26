@@ -111,7 +111,7 @@ public class Parser {
         else if(ch == '^') {
             this.curExpressionBuilder = new ExpoExpressionBuilder(ch);
         }else {
-         	System.out.println("不认识");
+            this.curExpressionBuilder = new SymbolExpressionBuilder(ch);
         }
         
         return true;

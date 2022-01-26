@@ -10,7 +10,7 @@ public class TestExpressionParser {
     
     @Test
     public void test01() throws ParseExpressionException {
-        Parser parser = new Parser("a");
+        Parser parser = new Parser("v=[data_needed.growth>1.5]");
         BaseExpression parse = parser.parse();
         System.out.println(parser.getExpression() + " ==> " + parse);
         assert parse.toString().equals("a");

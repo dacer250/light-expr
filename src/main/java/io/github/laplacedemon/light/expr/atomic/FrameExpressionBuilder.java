@@ -38,17 +38,34 @@ public class FrameExpressionBuilder extends ExpressionBuilder {
         return true;
     }
     
+    @Override
     public FrameExpression build() throws ParseExpressionException {
         String value = super.value();
-        String[]arr =value.split(":");
-        if(arr==null || arr.length!=2){
-            throw new ParseExpressionException("过滤操作符失败");
+       String[]arr =null;
+        if(value.contains(":")){
+            arr= value.split(":");
+        }
+        if(value.contains(".")){
+            arr= value.split("\\.");
         }
 
-        Parser parser = new Parser(arr[1]);
-        BaseExpression baseExpression = parser.parse();
-        FrameExpression frameExpression = new FrameExpression(arr[0].trim(), baseExpression);
-        return frameExpression;
+//        if(arr==null || arr.length!=2){
+//            throw new ParseExpressionException("过滤操作符失败");
+//        }
+        if(arr.length==2){
+            Parser parser = new Parser(arr[1]);
+            BaseExpression baseExpression = parser.parse();
+            FrameExpression frameExpression = new FrameExpression(arr[0].trim(), baseExpression);
+            return frameExpression;
+        }
+        else {
+            Parser parser = new Parser(arr[0]);
+            BaseExpression baseExpression = parser.parse();
+            FrameExpression frameExpression = new FrameExpression(arr[0].trim(), baseExpression);
+            return frameExpression;
+        }
+
+
     }
 
 }

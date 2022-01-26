@@ -31,7 +31,12 @@ public class DivExpression extends PairExpression {
             
             pairExpression.setLeft(this);
             return pairExpression;
-        } else if(baseExpression instanceof MulExpression || baseExpression instanceof DivExpression) {
+        } else if(baseExpression instanceof ExpoExpression) {
+            PairExpression pairExpression = (PairExpression)baseExpression;
+            pairExpression.setLeft(this);
+            return pairExpression;
+        }
+        else if(baseExpression instanceof MulExpression || baseExpression instanceof DivExpression) {
             PairExpression pairExpression = (PairExpression)baseExpression;
             pairExpression.setLeft(this);
             return pairExpression;

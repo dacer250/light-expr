@@ -33,7 +33,13 @@ public class SymbolExpressionBuilder extends ExpressionBuilder {
         ) {
             sb.append(ch);
             return true;
-        } else if ('.' == ch) {
+        }else if ((19968 <= ch && ch <40869)){
+            sb.append(ch);
+            return true;
+        }
+
+
+        else if ('.' == ch) {
             type = Type.Attribute;
             
             if(symbolList == null) {
@@ -51,6 +57,7 @@ public class SymbolExpressionBuilder extends ExpressionBuilder {
         }
     }
     
+    @Override
     public SymbolExpression build() {
         String value = sb.toString();
         if (type == Type.Symbol) {
