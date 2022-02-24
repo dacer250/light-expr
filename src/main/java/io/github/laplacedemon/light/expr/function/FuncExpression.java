@@ -55,6 +55,15 @@ public class FuncExpression extends ItemExpression {
 	public PriorityExpression getPriorityExpression() {
 		return priorityExpression;
 	}
+
+  public BlockExpression getBlockExpression() {
+    return blockExpression;
+  }
+
+//  public void setBlockExpression(BlockExpression blockExpression) {
+//    this.blockExpression = blockExpression;
+//  }
+
   @Override
   public BaseExpression join(BaseExpression baseExpression) throws ParseExpressionException{
       if(func.equalsIgnoreCase("loop")&&
