@@ -110,7 +110,9 @@ public class Parser {
         }
         else if(ch == '^') {
             this.curExpressionBuilder = new ExpoExpressionBuilder(ch);
-        }else {
+        }else if(ch == '{') {
+            this.curExpressionBuilder = new BlockExpressionBuilder(ch);
+        }else{
             this.curExpressionBuilder = new SymbolExpressionBuilder(ch);
         }
         

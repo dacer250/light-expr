@@ -48,7 +48,6 @@ public abstract class ItemExpression extends BaseExpression {
     		} else if(value.equals("as") || value.equals("As") || value.equals("AS")) {
 				AsStatement asStatement = new AsStatement();
 				asStatement.setLeft(this);
-				
 				return asStatement;
     		} else {
     			CommonStatement commonState = new CommonStatement();

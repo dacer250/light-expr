@@ -1,12 +1,16 @@
 package io.github.laplacedemon.light.expr.function;
 
+import io.github.laplacedemon.light.expr.BaseExpression;
 import io.github.laplacedemon.light.expr.ItemExpression;
+import io.github.laplacedemon.light.expr.atomic.BlockExpression;
 import io.github.laplacedemon.light.expr.atomic.PriorityExpression;
+import io.github.laplacedemon.light.expr.parse.ParseExpressionException;
 import io.github.laplacedemon.light.expr.util.IncomputableException;
 
 public class FuncExpression extends ItemExpression {
 	private String func;
 	private PriorityExpression priorityExpression;
+	private BlockExpression blockExpression;
     
     public FuncExpression(String func, PriorityExpression priorityExpression) {
     	this.func = func;
@@ -51,6 +55,13 @@ public class FuncExpression extends ItemExpression {
 	public PriorityExpression getPriorityExpression() {
 		return priorityExpression;
 	}
-	
+  @Override
+  public BaseExpression join(BaseExpression baseExpression) throws ParseExpressionException{
+      if(func.equalsIgnoreCase("loop")&&
+      baseExpression instanceof BlockExpression){
+        blockExpression=(BlockExpression)baseExpression;
+      }
+      return this;
+  }
     
 }
